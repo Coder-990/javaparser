@@ -2,6 +2,11 @@
 <project version="4">
   <component name="RemoteRepositoriesConfiguration">
     <remote-repository>
+      <option name="id" value="getihub-maven-private" />
+      <option name="name" value="getihub-maven-private" />
+      <option name="url" value="https://devtools.serengetitech.com/nexus/repository/maven-private/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="central" />
       <option name="name" value="Central Repository" />
       <option name="url" value="https://repo.maven.apache.org/maven2" />
@@ -12,9 +17,19 @@
       <option name="url" value="https://repo1.maven.org/maven2" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="getihub-maven-release" />
+      <option name="name" value="getihub-maven-release" />
+      <option name="url" value="https://devtools.serengetitech.com/nexus/repository/getihub-maven-release/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="jboss.community" />
       <option name="name" value="JBoss Community repository" />
       <option name="url" value="https://repository.jboss.org/nexus/content/repositories/public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="getihub-maven-snapshot" />
+      <option name="name" value="getihub-maven-snapshot" />
+      <option name="url" value="https://devtools.serengetitech.com/nexus/repository/getihub-maven-snapshot/" />
     </remote-repository>
   </component>
 </project>

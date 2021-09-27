@@ -22,23 +22,21 @@ public class Datoteke {
     private static final String newLine = "#newLine#";
     private static final Pattern pattern = Pattern.compile(newLine);
 
-    public Map<List<WebServers>, List<Long>> unosSvihWebServera() {
-       Map <List<WebServers>, List<Long>> mapalogWebServera = new HashMap<>();
-        putContactInMap(mapalogWebServera,"home");
-        putContactInMap(mapalogWebServera,"help_page");
-        putContactInMap(mapalogWebServera,"contact");
-        putContactInMap(mapalogWebServera,"about");
-        putContactInMap(mapalogWebServera, "index");
-        return mapalogWebServera;
+    public void printMap(Map<List<WebServers>, List<Long>> map) {
+        for (Map.Entry<List<WebServers>, List<Long>> entry : map.entrySet()) {
+            Collections.sort(entry.getValue());
+            System.out.println(" " + entry.getKey().stream().findFirst() + " posjeta : " + entry.getValue());
+        }
     }
 
-    private void putContactInMap(Map<List<WebServers>, List<Long>> mapaLogWebServera, String contact) {
-        List<WebServers> nazivPosjeta = logListWebServers.stream()
-                .filter(webServers -> webServers.getIpAddress().contains(contact)).collect(Collectors.toList());
-        mapaLogWebServera.put(nazivPosjeta, new ArrayList<>());
-        long brojPosjeta = logListWebServers.stream()
-                .filter(webServers -> webServers.getIpAddress().contains(contact)).count();
-        mapaLogWebServera.get(nazivPosjeta).add(brojPosjeta);
+    public Map<List<WebServers>, List<Long>> unosSvihWebServera() {
+        Map<List<WebServers>, List<Long>> mapalogWebServera = new HashMap<>();
+        putContactInMap(mapalogWebServera, "home");
+        putContactInMap(mapalogWebServera, "help_page");
+        putContactInMap(mapalogWebServera, "contact");
+        putContactInMap(mapalogWebServera, "about");
+        putContactInMap(mapalogWebServera, "index");
+        return mapalogWebServera;
     }
 
     public List<WebServers> ucitajServere(String imeDatoteke) {
@@ -48,6 +46,15 @@ public class Datoteke {
             String ipAdresa = adrese.get(0);
             return new WebServers(ipAdresa);
         }).collect(Collectors.toList());
+    }
+
+    private void putContactInMap(Map<List<WebServers>, List<Long>> mapaLogWebServera, String name) {
+        List<WebServers> nazivPosjeta = logListWebServers.stream()
+                .filter(webServers -> webServers.getIpAddress().contains(name)).collect(Collectors.toList());
+        mapaLogWebServera.put(nazivPosjeta, new ArrayList<>());
+        long brojPosjeta = logListWebServers.stream()
+                .filter(webServers -> webServers.getIpAddress().contains(name)).count();
+        mapaLogWebServera.get(nazivPosjeta).add(brojPosjeta);
     }
 
     private List<String> prebrojiLinije(List<String> datotekaAsListOfStr) {
@@ -67,28 +74,8 @@ public class Datoteke {
             listaDatoteke = linije.map(String::trim).filter(file -> !file.isEmpty()).collect(Collectors.toList());
         } catch (IOException ex) {
             System.err.println("Pogreska kod ucitavanja datoteke " + datoteka + "\n" + ex.getMessage());
+            ex.printStackTrace();
         }
         return listaDatoteke;
     }
-
-//    private void putHelpPageInMap(Map<WebServers, List<Long>> mapaLogWebServera) {
-//        List<WebServers> nazivPosjetaHelpPage = logListWebServers.stream()
-//                .filter(webServers -> webServers.getIpAddress().contains("help_page")).collect(Collectors.toList());
-//        mapaLogWebServera.put((WebServers) nazivPosjetaHelpPage, new ArrayList<>());
-//        long brojPosjetaHelpPage = logListWebServers.stream()
-//                .filter(webServers -> webServers.getIpAddress().contains("help_page")).count();
-//        mapaLogWebServera.get(nazivPosjetaHelpPage).add(brojPosjetaHelpPage);
-//    }
-//
-//    private void putHomeInMap(Map<WebServers, List<Long>> mapaLogWebServera) {
-//        List<WebServers> nazivPosjetaHome = logListWebServers.stream()
-//                .filter(webServers -> webServers.getIpAddress().contains("home")).collect(Collectors.toList());
-//        mapaLogWebServera.put((WebServers) nazivPosjetaHome, new ArrayList<>());
-//        long brojPosjetaHome = logListWebServers.stream()
-//                .filter(webServers -> webServers.getIpAddress().contains("home")).count();
-//        mapaLogWebServera.get(nazivPosjetaHome).add(brojPosjetaHome);
-//    }
-
-
-
 }
