@@ -2,6 +2,7 @@ package hr.java.parser.main;
 
 import hr.java.parser.model.WebServers;
 
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class Main {
     public static List<WebServers> logListWebServers;
     protected static Map<List<WebServers>, List<Long>> mapalogWebServera;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Datoteke datoteke = new Datoteke();
 

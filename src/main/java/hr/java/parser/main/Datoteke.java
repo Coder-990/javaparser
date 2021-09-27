@@ -39,7 +39,7 @@ public class Datoteke {
         return mapalogWebServera;
     }
 
-    public List<WebServers> ucitajServere(String imeDatoteke) {
+    public List<WebServers> ucitajServere(String imeDatoteke) throws IOException {
         List<String> ucitavanje = ucitajDatoteku(imeDatoteke);
         return prebrojiLinije(ucitavanje).stream().map(line -> {
             List<String> adrese = Arrays.asList(pattern.split(line));
@@ -66,16 +66,10 @@ public class Datoteke {
         return listaLinija;
     }
 
-    private List<String> ucitajDatoteku(String datoteka) {
+    private List<String> ucitajDatoteku(String datoteka) throws IOException {
         Path putanjaDatoteke = Paths.get(FILE_LOCATION + datoteka);
         Charset encoding = StandardCharsets.UTF_8;
-        List<String> listaDatoteke = new ArrayList<>();
-        try (Stream<String> linije = Files.lines(Path.of(String.valueOf(putanjaDatoteke)), encoding)) {
-            listaDatoteke = linije.map(String::trim).filter(file -> !file.isEmpty()).collect(Collectors.toList());
-        } catch (IOException ex) {
-            System.err.println("Pogreska kod ucitavanja datoteke " + datoteka + "\n" + ex.getMessage());
-            ex.printStackTrace();
-        }
-        return listaDatoteke;
+        Stream<String> linije = Files.lines(Path.of(String.valueOf(putanjaDatoteke)), encoding);
+        return linije.map(String::trim).filter(file -> !file.isEmpty()).collect(Collectors.toList());
     }
 }
