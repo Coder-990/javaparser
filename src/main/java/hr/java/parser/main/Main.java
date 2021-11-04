@@ -3,26 +3,23 @@ package hr.java.parser.main;
 import hr.java.parser.model.WebServers;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static hr.java.parser.main.FilesRead.fileReader;
+
 public class Main {
-
-    public static final String FILE_LOCATION = "dat/";
-
-    public static List<WebServers> logListWebServers;
-    protected static Map<List<WebServers>, List<Long>> mapalogWebServera;
 
     public static void main(String[] args) throws IOException {
 
-        Datoteke datoteke = new Datoteke();
+        Files files = new Files();
+        FilesStore fs = new FilesStore();
+        FilesPrint fp = new FilesPrint();
 
-        System.out.println("Ucitavanje datoteke " + WebServers.FILE_WEB_SERVERS + " ...");
-        logListWebServers = datoteke.ucitajServere(WebServers.FILE_WEB_SERVERS);
-
-        mapalogWebServera = datoteke.unosSvihWebServera();
-
-        datoteke.printMap(mapalogWebServera);
+        fileReader(files);
+        Map<List<WebServers>, List<Long>> countedMapOfVisitWebServers = fs.getAllUniqueVisits();
+        fp.printMap(countedMapOfVisitWebServers);
     }
+
+
 }

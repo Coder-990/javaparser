@@ -2,15 +2,13 @@ package hr.java.parser.model;
 
 import java.util.List;
 
-public class WebServers {
+public class WebServers{
 
     private String ipAddress;
-    private List<WebServers> listaWebServera;
+    private List<WebServers> listWebServers;
 
     public static final String FILE_WEB_SERVERS = "webserver.log";
-    public static final Integer BROJ_LINIJA_PO_ZAPISU = 500;
-
-
+    public static final Integer NUMBER_OF_LINES_PER_RECORD = 500;
 
     public WebServers(String ipAddress) {
         this.ipAddress = ipAddress;
@@ -24,15 +22,14 @@ public class WebServers {
         this.ipAddress = ipAddress;
     }
 
-    public List<WebServers> getListaWebServera(List<WebServers> listaDatoteka) {
-        return listaWebServera;
+    public List<WebServers> getListWebServers(List<WebServers> listaDatoteka) {
+        return listWebServers;
     }
 
-    public void setListaWebServera(List<WebServers> listaWebServera) {
-        this.listaWebServera = listaWebServera;
-    }
+    public void setListWebServers(List<WebServers> listWebServers) {
+        this.listWebServers = listWebServers;
+    }@Override
 
-    @Override
     public String toString() {
         return ipAddress.substring(0,10)+ '\'';
     }
