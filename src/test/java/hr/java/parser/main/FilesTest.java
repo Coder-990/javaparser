@@ -30,7 +30,7 @@ class FilesTest {
     }
 
     @Test
-    public void shouldLoadFromFile() {
+    public void shouldFindFile() {
         String file = WebServers.FILE_WEB_SERVERS;
         assertEquals("webserver.log",file);
     }
